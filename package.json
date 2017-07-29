@@ -30,8 +30,8 @@
     "prepublish": "npm run build"
   },
   "dependencies": {
-    "core-js": "2.4.1",
-    "rxjs": "5.2.0"
+    "core-js": "^2.4.1",
+    "rxjs": "^5.2.0"
   },
   "devDependencies": {
     "@types/core-js": "0.9.34",
@@ -58,7 +58,7 @@
     "npm-install-peers": "1.1.0",
     "source-map-loader": "0.1.5",
     "ts-helpers": "1.1.1",
-    "tslib": "^1.7.1",
+    "tslib": "1.7.1",
     "typescript": "2.1.5"
   }
 }

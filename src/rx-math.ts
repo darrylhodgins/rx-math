@@ -144,10 +144,17 @@ export class RxMath {
 		);
 	}
 
-	public static round(xObs: Observable<number>): Observable<number> {
-		return xObs.map((x: number) => Math.round(x));
-	}
+	public static round(xObs: ValueOrObservable, precision?: ValueOrObservable): Observable<number> {
+		precision = precision || 0;
 
+		let factor: Observable<number> = RxMath.pow(10, _normalizeValue(precision));
+
+		return RxMath.divide(
+			RxMath.multiply(xObs, factor).map((x: number) => Math.round(x))
+			, factor
+		);
+	}
+	
 	public static sign(xObs: Observable<number>): Observable<number> {
 		return xObs.map((x: number) => Math.sign(x));
 	}
