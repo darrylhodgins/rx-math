@@ -1,0 +1,50 @@
+{
+ 	"compilerOptions": {
+		"target": "es5",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"declaration": true,
+		"removeComments": true,
+		"sourceMap": true,
+		"outDir": "./dist",
+		"noImplicitAny": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"allowJs": false,
+		"noEmitHelpers": true,
+		"types": [
+			"node",
+			"jasmine",
+			"core-js",
+			"hammerjs"
+		]
+	},
+	"compileOnSave": false,
+	"buildOnSave": false,
+	"files": [
+		"src/index.ts"
+	],
+	"exclude": [
+		"dist",
+		"node_modules",
+		"coverage",
+		"doc",
+		"resources",
+		"bower_components",
+		"vendor",
+		"test",
+		"build"
+	],
+	"formatCodeOptions": {
+		"indentSize": 4,
+		"tabSize": 4,
+		"insertSpaceAfterCommaDelimiter": true,
+		"insertSpaceAfterSemicolonInForStatements": true,
+		"insertSpaceBeforeAndAfterBinaryOperators": true,
+		"insertSpaceAfterKeywordsInControlFlowStatements": true,
+		"insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+		"insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+		"placeOpenBraceOnNewLineForFunctions": false,
+		"placeOpenBraceOnNewLineForControlBlocks": false
+	}
+}

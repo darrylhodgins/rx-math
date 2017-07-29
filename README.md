@@ -3,8 +3,8 @@
 Helpers to write functional reactive calculators
 
 ```bash
-npm install --save rxmath
+npm install --save rx-math
 ```
 
 This package contains:
-* `RxMath`
+* `rx-math`

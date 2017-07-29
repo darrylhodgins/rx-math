@@ -1,0 +1,64 @@
+{
+  "name": "rx-math",
+  "version": "1.0.1",
+  "description": "Reactive Math",
+  "author": "Darryl Hodgins <darrylh@darrylh.ca>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darrylhodgins/rx-math.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "reactive",
+    "rxjs",
+    "math",
+    "observable"
+  ],
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "typescript": {
+    "definition": "dist/index.d.ts"
+  },
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "clean": "rm -rf ./dist",
+    "build": "tsc",
+    "test": "karma start test/karma.config.js --single-run",
+    "prepublish": "npm run build"
+  },
+  "dependencies": {
+    "core-js": "2.4.1",
+    "rxjs": "5.2.0"
+  },
+  "devDependencies": {
+    "@types/core-js": "0.9.34",
+    "@types/hammerjs": "2.0.33",
+    "@types/jasmine": "2.5.38",
+    "@types/node": "0.0.0",
+    "awesome-typescript-loader": "3.0.0-beta.9",
+    "del": "2.2.1",
+    "es6-shim": "0.35.1",
+    "jasmine-core": "2.4.1",
+    "karma": "1.5.0",
+    "karma-chrome-launcher": "2.0.0",
+    "karma-es6-shim": "1.0.0",
+    "karma-jasmine": "1.1.0",
+    "karma-jasmine-html-reporter": "0.2.2",
+    "karma-junit-reporter": "1.2.0",
+    "karma-phantomjs-launcher": "1.0.2",
+    "karma-sourcemap-loader": "0.3.7",
+    "karma-spec-reporter": "0.0.26",
+    "karma-threshold-reporter": "0.1.15",
+    "karma-typescript": "2.1.7",
+    "merge2": "1.0.2",
+    "npm": "3.10.0",
+    "npm-install-peers": "1.1.0",
+    "source-map-loader": "0.1.5",
+    "ts-helpers": "1.1.1",
+    "tslib": "^1.7.1",
+    "typescript": "2.1.5"
+  }
+}

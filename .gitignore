@@ -1,0 +1,6 @@
+lcov.info
+npm-debug.log
+dist
+node_modules
+report
+junit-results.xml
