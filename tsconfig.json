@@ -15,8 +15,7 @@
 		"types": [
 			"node",
 			"jasmine",
-			"core-js",
-			"hammerjs"
+			"core-js"
 		]
 	},
 	"compileOnSave": false,
@@ -29,11 +28,7 @@
 		"node_modules",
 		"coverage",
 		"doc",
-		"resources",
-		"bower_components",
-		"vendor",
-		"test",
-		"build"
+		"test"
 	],
 	"formatCodeOptions": {
 		"indentSize": 4,

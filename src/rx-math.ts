@@ -18,10 +18,8 @@ export class RxMath {
 
 	public static add(...valueObservables: ValueOrObservable[]): Observable<number> {
 		return Observable
-			.combineLatest(
-				normalizeValues(valueObservables),
-				(values: number[]) => _additionReducer.apply(this, values)
-			);
+			.combineLatest.apply(this, normalizeValues(valueObservables))
+			.map((values: number[]) => _additionReducer.apply(this, values));
 	}
 
 	/**
@@ -29,18 +27,14 @@ export class RxMath {
 	 */
 	public static subtract(...valueObservables: ValueOrObservable[]): Observable<number> {
 		return Observable
-			.combineLatest(
-				normalizeValues(valueObservables),
-				(values: number[]) => _subtractionReducer.apply(this, values)
-			);
+			.combineLatest.apply(this, normalizeValues(valueObservables))
+			.map((values: number[]) => _subtractionReducer.apply(this, values));
 	}
 
 	public static multiply(...valueObservables: ValueOrObservable[]): Observable<number> {
 		return Observable
-			.combineLatest(
-				normalizeValues(valueObservables),
-				(values: number[]) => _multiplicationReducer.apply(this, values)
-			);
+			.combineLatest.apply(this, normalizeValues(valueObservables))
+			.map((values: number[]) => _multiplicationReducer.apply(this, values));
 	}
 
 	public static divide(xObservable: ValueOrObservable, yObservable: ValueOrObservable): Observable<number> {
@@ -123,17 +117,15 @@ export class RxMath {
 	}
 
 	public static max(...valuesObs: ValueOrObservable[]): Observable<number> {
-		return Observable.combineLatest(
-			normalizeValues(valuesObs),
-			(values: number[]) => Math.max.apply(this, values)
-		);
+		return Observable
+			.combineLatest.apply(this, normalizeValues(valuesObs))
+			.map((values: number[]) => Math.max.apply(this, values));
 	}
 
 	public static min(...valuesObs: ValueOrObservable[]): Observable<number> {
-		return Observable.combineLatest(
-			normalizeValues(valuesObs),
-			(values: number[]) => Math.min.apply(this, values)
-		);
+		return Observable
+			.combineLatest.apply(this, normalizeValues(valuesObs))
+			.map((values: number[]) => Math.min.apply(this, values));
 	}
 	
 	public static pow(xObs: ValueOrObservable, yObs: ValueOrObservable): Observable<number> {
