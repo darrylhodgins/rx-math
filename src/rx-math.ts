@@ -1,12 +1,6 @@
 import {Observable} from 'rxjs/Rx';
-
-function _normalizeValue(value: ValueOrObservable) {
-	return (typeof value === 'number') ? Observable.of(value) : value;
-}
-
-function _normalizeValues(values: ValueOrObservable[]) {
-	return values.map(_normalizeValue);
-}
+import {ObservableInput} from 'rxjs/Observable';
+import {ValueOrObservable, normalizeValue, normalizeValues} from './value-or-observable';
 
 function _multiplicationReducer(...values: number[]): number {
 	return values.reduce((prev: number, val: number) => prev * val, 1);
@@ -20,14 +14,14 @@ function _subtractionReducer(initial: number, ...values: number[]): number {
 	return values.reduce((prev: number, val: number) => prev - val, initial);
 }
 
-export type ValueOrObservable = Observable<number> | number;
-
 export class RxMath {
 
 	public static add(...valueObservables: ValueOrObservable[]): Observable<number> {
 		return Observable
-			.combineLatest.apply(this, _normalizeValues(valueObservables))
-			.map((values: number[]) => _additionReducer.apply(this, values));
+			.combineLatest(
+				normalizeValues(valueObservables),
+				(values: number[]) => _additionReducer.apply(this, values)
+			);
 	}
 
 	/**
@@ -35,21 +29,25 @@ export class RxMath {
 	 */
 	public static subtract(...valueObservables: ValueOrObservable[]): Observable<number> {
 		return Observable
-			.combineLatest.apply(this, _normalizeValues(valueObservables))
-			.map((values: number[]) => _subtractionReducer.apply(this, values));
+			.combineLatest(
+				normalizeValues(valueObservables),
+				(values: number[]) => _subtractionReducer.apply(this, values)
+			);
 	}
 
 	public static multiply(...valueObservables: ValueOrObservable[]): Observable<number> {
 		return Observable
-			.combineLatest.apply(this, _normalizeValues(valueObservables))
-			.map((values: number[]) => _multiplicationReducer.apply(this, values));
+			.combineLatest(
+				normalizeValues(valueObservables),
+				(values: number[]) => _multiplicationReducer.apply(this, values)
+			);
 	}
 
-	public static divide(divisorObservable: ValueOrObservable, dividendObservable: ValueOrObservable): Observable<number> {
+	public static divide(xObservable: ValueOrObservable, yObservable: ValueOrObservable): Observable<number> {
 		return Observable.combineLatest(
-			_normalizeValue(divisorObservable),
-			_normalizeValue(dividendObservable),
-			(divisor: number, dividend: number) => divisor / dividend
+			normalizeValue(xObservable),
+			normalizeValue(yObservable),
+			(x: number, y: number) => x / y
 		);
 	}
 
@@ -59,7 +57,7 @@ export class RxMath {
 
 	public static average(...valueObservables: ValueOrObservable[]): Observable<number> {
 		return RxMath
-			.add.apply(this, _normalizeValues(valueObservables))
+			.add.apply(this, normalizeValues(valueObservables))
 			.map((total: number) => total / valueObservables.length);
 	}
 
@@ -125,21 +123,23 @@ export class RxMath {
 	}
 
 	public static max(...valuesObs: ValueOrObservable[]): Observable<number> {
-		return Observable
-			.combineLatest.apply(this, _normalizeValues(valuesObs))
-			.map((values: number[]) => Math.max.apply(this, values));
+		return Observable.combineLatest(
+			normalizeValues(valuesObs),
+			(values: number[]) => Math.max.apply(this, values)
+		);
 	}
 
 	public static min(...valuesObs: ValueOrObservable[]): Observable<number> {
-		return Observable
-			.combineLatest.apply(this, _normalizeValues(valuesObs))
-			.map((values: number[]) => Math.min.apply(this, values));
+		return Observable.combineLatest(
+			normalizeValues(valuesObs),
+			(values: number[]) => Math.min.apply(this, values)
+		);
 	}
 	
 	public static pow(xObs: ValueOrObservable, yObs: ValueOrObservable): Observable<number> {
 		return Observable.combineLatest(
-			_normalizeValue(xObs),
-			_normalizeValue(yObs),
+			normalizeValue(xObs),
+			normalizeValue(yObs),
 			Math.pow
 		);
 	}
@@ -147,7 +147,7 @@ export class RxMath {
 	public static round(xObs: ValueOrObservable, precision?: ValueOrObservable): Observable<number> {
 		precision = precision || 0;
 
-		let factor: Observable<number> = RxMath.pow(10, _normalizeValue(precision));
+		let factor: Observable<number> = RxMath.pow(10, normalizeValue(precision));
 
 		return RxMath.divide(
 			RxMath.multiply(xObs, factor).map((x: number) => Math.round(x))
